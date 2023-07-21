@@ -1,18 +1,19 @@
-import './style.css';
+import '../style/style.css';
 import { NavLink } from 'react-router-dom';
 import { FaShoppingCart, FaSearch } from 'react-icons/fa';
 import { cartContext } from '../context/Context';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
  const Navbar = () => {
   const { cartItems } = useContext(cartContext);
-  const handleSearch=()=>{
-
-  }
+  const [search, setSearch] = useState('');
+   const handleSearch = () => {
+   
+   }
    return (
     <div className="fixed top-0 left-0 right-0 h-20 flex flex-col px-4 bg-white shadow">
       <div className="hidden md:flex flex-row justify-between gap-6 mt-2 pt-4 text-lg font-medium">
         <div>
-          <NavLink className="ml-4 hover:text-green-500 active:text-green-500 active:text-2xl"  to="/">
+          <NavLink className="ml-4 hover:text-green-500 active:text-green-500 active:text-2xl" to="/">
             Home
           </NavLink>
           <NavLink className="ml-4 hover:text-green-500 active:text-green-500" to="/about">
@@ -28,8 +29,11 @@ import { useContext } from 'react';
             name="search"
             placeholder='search here...'
             className=" w-64 px-4 py-2 rounded-md bg-gray-100 shadow-inner  focus:outline-none   mr-5"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          <FaSearch className="mr-2 text-2xl cursor-pointer text-gray-500  text-blue-600 hover:text-blue-700" onClick={()=>handleSearch()} />
+          {console.log(search)}
+          <FaSearch className="mr-2 text-2xl cursor-pointer text-gray-500  text-blue-600 hover:text-blue-700" onClick={() => handleSearch()} />
         </span>
         <div className="flex flex-row justify-between gap-6">
           {cartItems.length >= 1 && (
@@ -47,6 +51,8 @@ import { useContext } from 'react';
             Login
           </NavLink>
         </div>
+      </div>
+      <div>
       </div>
     </div>
   );

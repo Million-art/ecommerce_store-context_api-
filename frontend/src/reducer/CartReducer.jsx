@@ -27,8 +27,8 @@ export const initialState = {
         if (item.id === action.payload) {
           return {
             ...item,
-            quantity: item.quantity + 1,
-            price: item.price * (item.quantity + 1) 
+            rating: item.rating + 1,
+            price: item.price * (rating)  
             
           };
         }

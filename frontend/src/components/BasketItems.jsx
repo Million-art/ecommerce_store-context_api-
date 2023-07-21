@@ -6,6 +6,7 @@ import { cartContext } from "../context/Context";
    const handleIncreaseQuantity = (itemId) => {
     dispatch({ type: 'increase quantity', payload: itemId });
     setQuantity((prevQuantity) => prevQuantity + 1);
+
   };
    const handleDecreaseQuantity = (itemId) => {
     dispatch({ type: 'decrease quantity', payload: itemId });

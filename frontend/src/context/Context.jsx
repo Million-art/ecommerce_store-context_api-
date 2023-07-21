@@ -13,7 +13,7 @@ import { reducer, initialState } from '../reducer/CartReducer';
       (product) => product.id !== item.id
     );
     dispatch({ type: 'remove', payload: updatedCartItems });
-    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+     localStorage.clear()
 
   };
    const calculateTotal = () => {
