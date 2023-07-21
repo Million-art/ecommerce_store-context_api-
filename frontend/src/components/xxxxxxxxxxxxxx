@@ -1,0 +1,14 @@
+To manage the total when the quantity is increased on a cart page using context and useReducer,
+ you can follow these steps:
+ 1. Create a context: Set up a context using the createContext() function. This context will hold the state and dispatch function for your cart.
+ 2. Set up initial state: Define an initial state object that represents the cart.
+  It should include an array of items with properties like name, price, and quantity.
+ 3. Create a reducer: Write a reducer function that handles different actions to update the cart state.
+  One action could be "INCREASE_QUANTITY" which increments the quantity of a specific item in the cart.
+ 4. Dispatch the action: In your cart page component, use the useContext() hook to access the cart context and retrieve the dispatch function.
+  When the user increases the quantity of an item, dispatch the "INCREASE_QUANTITY" action with the appropriate payload (e.g., the item ID).
+ 5. Update the state: In the reducer, handle the "INCREASE_QUANTITY" action.
+  Find the item in the cart based on the payload (item ID) and update its quantity accordingly. 
+  You can calculate the new total by iterating over the items in the cart and summing up the prices multiplied by the quantities.
+ 6. Display the total: In your cart page component, you can now access the updated total from the cart state and display it to the user.
+ By following these steps, you can manage the total when the quantity is increased on your cart page using context and useReducer.
