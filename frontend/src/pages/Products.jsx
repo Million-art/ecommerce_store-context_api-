@@ -10,7 +10,7 @@ import {toast } from 'react-toastify';
   const fetchAPI = async () => {
     try {
       const response = await axios.get('https://makeup-api.herokuapp.com/api/v1/products.json');
-      const shuffledData = response.data.sort(() => Math.random() - 0.5);
+      const shuffledData = response.data.sort(() => Math.random() - 0.5) 
       const selectedItems = shuffledData.slice(0, 20);
       return selectedItems;
     } catch (error) {
@@ -39,12 +39,14 @@ import {toast } from 'react-toastify';
       <div className="flex flex-row justify-between mt-20">
         <div className="flex flex-row flex-wrap w-3/4">
           {data && data.map((product) => (
+           
             <ProductList
               key={product.id}
               product={product}
               handleAdd={handleAdd}
               disabled={cartItems.includes(product)}
             />
+            
           ))}
         </div>
         <div className="pr-5 w-1/4 text-center text-2xl">

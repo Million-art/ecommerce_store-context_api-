@@ -29,6 +29,7 @@ import { reducer, initialState } from '../reducer/CartReducer';
     addToCart,
     removeFromCart,
     calculateTotal,
+    dispatch
   };
    return (
     <cartContext.Provider value={value}>

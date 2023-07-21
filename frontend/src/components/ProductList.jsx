@@ -1,6 +1,8 @@
  
 
 const ProductList = ({product ,handleAdd,disabled}) => {
+  
+ 
   return (
     <div className="product-container flex flex-col px-4 py-6 m-4 w-[230px] border-gray-300 rounded-lg" key={product.id}>
               <div className="h-full">
