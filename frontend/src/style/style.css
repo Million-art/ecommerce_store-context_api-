@@ -4,7 +4,7 @@
 .spinner {
   position: absolute;
   background-color: rgb(238, 240, 241);
-  top: 100%;
+  
   left: 50%;
   transform: translate(-50%, -50%);
   border: 5px solid #f3f3f3;

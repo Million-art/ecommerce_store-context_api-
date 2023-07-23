@@ -15,6 +15,7 @@ import { motion } from 'framer-motion';
      return () => clearInterval(interval);
   }, [images]);
    return (
+    <>
     <div
       className="bg-cover bg-center w-screen h-screen mt-20 flex flex-col justify-center items-center space-y-8"
       style={{ backgroundImage: `url(${images[currentImage]})` }}
@@ -27,8 +28,8 @@ import { motion } from 'framer-motion';
         impedit dicta nulla debitis quibusdam nemo tempore eveniet odit nostrum<br></br>
         voluptate aperiam error, in, quo iure. Ex laudantium laboriosam deleniti.
       </p>
-      <Link
-        to="products"
+      <a
+        href="#products"
          duration={500}
         className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-full shadow-lg transition-colors duration-300"
       >
@@ -41,8 +42,12 @@ import { motion } from 'framer-motion';
           <BsArrowDown size={24} />
         </motion.span>
         Explore Now
-      </Link>
+      </a>
+      
     </div>
+    <h1 className="text-center text-4xl mt-20 text-blue-500 font-serif font-bold underline">Available Products</h1>
+
+    </>
   );
 };
  export default Slider;
