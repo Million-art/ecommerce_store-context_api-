@@ -13,7 +13,7 @@ import '../style/style.css';
   const [selectedFilter, setSelectedFilter] = useState('option1'); // Default filter option
   const [currentPage, setCurrentPage] = useState(0); // Set current page for pagination
   const { addToCart, cartItems } = useContext(cartContext);
-   const fetchAPI = async () => {
+    const fetchAPI = async () => {
     try {
       const response = await axios.get('https://makeup-api.herokuapp.com/api/v1/products.json');
       const shuffledData = response.data.sort(() => Math.random() - 0.5);
@@ -37,7 +37,7 @@ import '../style/style.css';
     }
   };
    const { data, error, isLoading } = useQuery(['data', selectedFilter], fetchAPI); // Include selectedFilter as a dependency
-   const handleAdd = (product) => {
+ const handleAdd = (product) => {
     if (!cartItems.includes(product)) {
       addToCart(product);
       toast.info('New item added successfully', {

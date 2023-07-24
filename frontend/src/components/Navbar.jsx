@@ -2,38 +2,65 @@ import { NavLink } from 'react-router-dom';
 import { FaShoppingCart, FaSearch, FaBars, FaTimes } from 'react-icons/fa';
 import { cartContext } from '../context/Context';
 import { useContext, useState, useEffect } from 'react';
+import axios from 'axios';
+import Search from './Search';
  const Navbar = () => {
-  const { cartItems } = useContext(cartContext);
+  const { addToCart, cartItems } = useContext(cartContext);
+  const [products, setProducts] = useState([]);
+  const [searchResult, setSearchResult] = useState('');
   const [search, setSearch] = useState('');
   const [showMenu, setShowMenu] = useState(false);
-  const [mobileSize, setMobileSize] = useState(false);
+  const [mobileSize, setMobileSize] = useState(window.innerWidth < 768);
+  const [loading, setLoading] = useState(false); // Add loading state
+   const handleSearch = async () => {
+    if (!search) return;
+     try {
+      setLoading(true); // Set loading to true
+      const response = await axios.get(
+        `https://makeup-api.herokuapp.com/api/v1/products.json?search=${search}`
+      );
+      const products = response.data;
+       setProducts(products);
+      const foundProduct = products.find(
+        (product) =>
+          product.brand &&
+          product.brand.toLowerCase() === search.toLowerCase()
+      );
+       setSearchResult(foundProduct ? foundProduct : 'No result');
+      setLoading(false); // Set loading to false after search is complete
+    } catch (error) {
+      console.error(error);
+      setLoading(false); // Set loading to false if there's an error
+    }
+  };
    useEffect(() => {
     const handleResize = () => {
       setMobileSize(window.innerWidth < 768);
     };
-     handleResize();
-    window.addEventListener('resize', handleResize);
-     return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+     window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
-   const handleSearch = () => {
-    // Handle search logic here
-  };
-   const toggleMenu = () => {
-    setShowMenu(true);
-  };
+   const toggleMenu = () => setShowMenu(!showMenu);
    return (
     <div className="fixed top-0 left-0 right-0 h-20 flex flex-col px-4 bg-white shadow">
       <div className="hidden md:flex flex-row justify-between gap-6 mt-2 pt-4 text-lg font-medium">
         <div>
-          <NavLink className="ml-4 hover:text-green-500 active:text-green-500 active:text-2xl" to="/">
+          <NavLink
+            className="ml-4 hover:text-green-500 active:text-green-500 active:text-2xl"
+            to="/"
+          >
             Home
           </NavLink>
-          <NavLink className="ml-4 hover:text-green-500 active:text-green-500" to="/about">
+          <NavLink
+            className="ml-4 hover:text-green-500 active:text-green-500"
+            to="/about"
+          >
             About
           </NavLink>
-          <NavLink className="ml-4 hover:text-green-500 active:text-green-500" to="/contact">
+          <NavLink
+            className="ml-4 hover:text-green-500 active:text-green-500"
+            to="/contact"
+          >
             Contact
           </NavLink>
         </div>
@@ -54,7 +81,10 @@ import { useContext, useState, useEffect } from 'react';
         <div className="flex flex-row justify-between gap-6">
           {cartItems.length >= 1 && (
             <span className="flex flex-row justify-between gap-5">
-              <NavLink className="ml-4 hover:text-green-500 flex flex-row justify-between" to="/basket">
+              <NavLink
+                className="ml-4 hover:text-green-500 flex flex-row justify-between"
+                to="/basket"
+              >
                 <FaShoppingCart className="mt-2" />
                 <sup>{cartItems.length}</sup>
               </NavLink>
@@ -69,24 +99,42 @@ import { useContext, useState, useEffect } from 'react';
         </div>
       </div>
       {mobileSize && (
-        <FaBars className="mt-2 w-10 h-5 md:hidden cursor-pointer mt-7" onClick={toggleMenu} />
+        <FaBars
+          className="mt-2 w-10 h-5 md:hidden cursor-pointer mt-7"
+          onClick={toggleMenu}
+        />
       )}
-       {/* Mobile menu dropdown */}
-      {showMenu &&  (
+      {/* Mobile menu dropdown */}
+      {showMenu && (
         <div className="md:hidden flex flex-col gap-4 mt-2 pt-4 text-lg font-medium ml-10 mt-20 text-white bg-gray-900">
-          <FaTimes className='ml-[90%] cursor-pointer text-red-700' onClick={()=>setShowMenu(false)}/>
-          <NavLink className="ml-4 hover:text-green-500 active:text-green-500 active:text-2xl" to="/">
+          <FaTimes
+            className="ml-[90%] cursor-pointer text-red-700"
+            onClick={() => setShowMenu(false)}
+          />
+          <NavLink
+            className="ml-4 hover:text-green-500 active:text-green-500 active:text-2xl"
+            to="/"
+          >
             Home
           </NavLink>
-          <NavLink className="ml-4 hover:text-green-500 active:text-green-500" to="/about">
+          <NavLink
+            className="ml-4 hover:text-green-500 active:text-green-500"
+            to="/about"
+          >
             About
           </NavLink>
-          <NavLink className="ml-4 hover:text-green-500 active:text-green-500" to="/contact">
+          <NavLink
+            className="ml-4 hover:text-green-500 active:text-green-500"
+            to="/contact"
+          >
             Contact
           </NavLink>
           {cartItems.length >= 1 && (
             <span className="flex flex-row justify-between gap-5">
-              <NavLink className="ml-4 hover:text-green-500 flex flex-row justify-between" to="/basket">
+              <NavLink
+                className="ml-4 hover:text-green-500 flex flex-row justify-between"
+                to="/basket"
+              >
                 <FaShoppingCart className="mt-2" />
                 <sup>{cartItems.length}</sup>
               </NavLink>
@@ -100,7 +148,14 @@ import { useContext, useState, useEffect } from 'react';
           </NavLink>
         </div>
       )}
-    </div>
+      {loading && <div>Loading...</div>} {/* Render loading animation */}
+      {searchResult && 
+         (<Search 
+        searchResult={searchResult}
+         disabled={cartItems.includes(searchResult)} 
+    />)
+    }
+     </div>
   );
 };
  export default Navbar;

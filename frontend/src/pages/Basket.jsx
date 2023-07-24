@@ -30,7 +30,7 @@ import BasketItems from '../components/BasketItems';
               <p className="text-xl">Your cart is empty.</p>
             )}
           </div>
-          <div className="w-1/4 fixed top-1/2 right-0 transform -translate-y-1/2">
+          <div className="w-1/3 fixed top-1/2 right-0 transform -translate-y-1/2">
             <div className="bg-white rounded-lg shadow-md p-4">
               <h3 className="text-xl font-bold mb-2">Cart Summary</h3>
               {cartItems.length > 0 ? (
