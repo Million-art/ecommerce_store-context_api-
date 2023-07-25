@@ -42,7 +42,13 @@ import Search from './Search';
   }, []);
    const toggleMenu = () => setShowMenu(!showMenu);
    return (
-    <div className="fixed top-0 left-0 right-0 h-20 flex flex-col px-4 bg-white shadow">
+    <div className='fixed top-0 left-0 right-0 h-20 bg-white'>
+    <div className=' flex flex-row justify-between'>
+      <NavLink to='/'>
+        <h1 className='font-serif text-3xl ml-5 mt-2 text-yellow-700  cursor-pointer outline-double px-4'>Mi Cosmotics</h1>
+      </NavLink>
+    </div>
+    <div className=" flex flex-col px-4 bg-white shadow">
       <div className="hidden md:flex flex-row justify-between gap-6 mt-2 pt-4 text-lg font-medium">
         <div>
           <NavLink
@@ -156,6 +162,7 @@ import Search from './Search';
     />)
     }
      </div>
+    </div>
   );
 };
  export default Navbar;

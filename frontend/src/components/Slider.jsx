@@ -45,6 +45,25 @@ import '../style/style.css';
           Explore Now
         </a>
       </div>
+      <div className="bg-gray-100 min-h-screen mt-40">
+      <div className="container mx-auto py-16 ">
+        <h1 className="text-4xl font-bold text-center mb-8">Discover Our Amazing Features</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-bold mb-4">Fast Shipping</h2>
+            <p className="text-gray-700">Get your favorite cosmetics delivered to your doorstep within 2-3 business days.</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-bold mb-4">Wide Range of Products</h2>
+            <p className="text-gray-700">Choose from a vast collection of high-quality cosmetics, including makeup, skincare, and fragrances.</p>
+          </div>
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-bold mb-4">Personalized Recommendations</h2>
+            <p className="text-gray-700">Discover new products tailored to your preferences with our advanced recommendation system.</p>
+          </div>
+        </div>
+      </div>
+    </div>
        <h1 className="text-center text-4xl mt-20 text-blue-500 font-serif font-bold underline">
         Available Products
       </h1>

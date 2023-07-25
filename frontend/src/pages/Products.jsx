@@ -41,7 +41,7 @@ import '../style/style.css';
     if (!cartItems.includes(product)) {
       addToCart(product);
       toast.info('New item added successfully', {
-        position: 'bottom-right',
+        position: 'top-right',
       });
     }
   };
