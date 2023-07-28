@@ -6,8 +6,8 @@ import image from '../assets/slider/slider1.jpg';
   return (
     <>
       <Navbar />
-      <div className="container mx-auto p-8">
-        <h1 className="text-3xl font-bold mb-4">About</h1>
+      <div className="container mx-auto p-8  mt-40">
+        <h1 className="text-3xl font-bold mb-4  flex justify-center text-blue-500 underline">About</h1>
         <img src={image} alt="About Us" className="mb-4" />
         <p className="text-lg">
           Welcome to our expertly designed ecommerce web application. Lorem ipsum dolor sit amet, consectetur adipiscing
