@@ -1,23 +1,34 @@
-import { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Navbar from '../components/Navbar';
 import { cartContext } from '../context/Context';
 import BasketItems from '../components/BasketItems';
- const Basket = () => {
+import Payment from '../components/Payment';
+
+const Basket = () => {
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
+  const [email, setEmail] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [checkout, setCheckout] = useState(false);
   const { removeFromCart, total, cartItems } = useContext(cartContext);
-  
+
   const handleRemove = (item) => {
     removeFromCart(item);
   };
-  
+
   const handleClearCart = () => {
     cartItems.forEach((item) => removeFromCart(item));
-     
   };
-   return (
+
+  const handleCheckout = () => {
+    setCheckout(true);
+  };
+
+  return (
     <div>
       <Navbar />
       <div className="container pt-20 mt-10 mx-auto py-10">
-        <h2 className="text-4xl font-bold mb-5">Your Cart({cartItems.length})</h2>
+        <h2 className="text-4xl font-bold mb-5">Your Cart ({cartItems.length})</h2>
         <div className="flex items-center">
           <div className="w-3/4">
             {cartItems.length > 0 ? (
@@ -56,10 +67,58 @@ import BasketItems from '../components/BasketItems';
                 <p>Your cart is empty.</p>
               )}
               {cartItems.length > 0 && (
-                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+                <button
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
+                  onClick={handleCheckout}
+                >
                   Checkout
                 </button>
               )}
+            {checkout && (
+             <div id="checkout" className="w-72 h-96 flex flex-col mt-4 bg-black p-6 rounded-lg">
+              <div className="flex flex-col mb-4">
+               <label htmlFor="fname" className="text-white font-bold mb-2">First Name</label>
+               <input
+                 className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                 onChange={(e) => setFname(e.target.value)}
+                 type="text"
+                 id="fname"
+                 placeholder="Enter your first name"
+               />
+             </div>
+             <div className="flex flex-col mb-4">
+               <label htmlFor="lname" className="text-white font-bold mb-2">Last Name</label>
+               <input
+                 className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                 onChange={(e) => setLname(e.target.value)}
+                 type="text"
+                 id="lname"
+                 placeholder="Enter your last name"
+               />
+             </div>
+             <div className="flex flex-col mb-4">
+               <label htmlFor="email" className="text-white font-bold mb-2">Email</label>
+               <input
+                 className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                 onChange={(e) => setEmail(e.target.value)}
+                 type="email"
+                 id="email"
+                 placeholder="Enter your email"
+               />
+             </div>
+             <div className="flex flex-col mb-4">
+               <label htmlFor="amount" className="text-white font-bold mb-2">Amount</label>
+               <input
+                 className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                 onChange={(e) => setAmount(e.target.value)}
+                 type="number"
+                 id="amount"
+                 placeholder="Enter the amount"
+               />
+             <Payment />
+             </div>
+           </div>
+            )}
             </div>
           </div>
         </div>
@@ -67,4 +126,5 @@ import BasketItems from '../components/BasketItems';
     </div>
   );
 };
- export default Basket;
+
+export default Basket;
