@@ -12,6 +12,9 @@ const Basket = () => {
   const [checkout, setCheckout] = useState(false);
   const { removeFromCart, total, cartItems } = useContext(cartContext);
 
+  const text_ref = `${fname}-tx-13122022`;
+  const public_key = process.env.CHAPA_API;
+
   const handleRemove = (item) => {
     removeFromCart(item);
   };
@@ -74,51 +77,66 @@ const Basket = () => {
                   Checkout
                 </button>
               )}
-            {checkout && (
-             <div id="checkout" className="w-72 h-96 flex flex-col mt-4 bg-black p-6 rounded-lg">
-              <div className="flex flex-col mb-4">
-               <label htmlFor="fname" className="text-white font-bold mb-2">First Name</label>
-               <input
-                 className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
-                 onChange={(e) => setFname(e.target.value)}
-                 type="text"
-                 id="fname"
-                 placeholder="Enter your first name"
-               />
-             </div>
-             <div className="flex flex-col mb-4">
-               <label htmlFor="lname" className="text-white font-bold mb-2">Last Name</label>
-               <input
-                 className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
-                 onChange={(e) => setLname(e.target.value)}
-                 type="text"
-                 id="lname"
-                 placeholder="Enter your last name"
-               />
-             </div>
-             <div className="flex flex-col mb-4">
-               <label htmlFor="email" className="text-white font-bold mb-2">Email</label>
-               <input
-                 className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
-                 onChange={(e) => setEmail(e.target.value)}
-                 type="email"
-                 id="email"
-                 placeholder="Enter your email"
-               />
-             </div>
-             <div className="flex flex-col mb-4">
-               <label htmlFor="amount" className="text-white font-bold mb-2">Amount</label>
-               <input
-                 className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
-                 onChange={(e) => setAmount(e.target.value)}
-                 type="number"
-                 id="amount"
-                 placeholder="Enter the amount"
-               />
-             <Payment />
-             </div>
-           </div>
-            )}
+              {checkout && (
+                <div id="checkout" className="w-72 h-96 flex flex-col mt-4 bg-black p-6 rounded-lg">
+                  <div className="flex flex-col mb-4">
+                    <label htmlFor="fname" className="text-white font-bold mb-2">
+                      First Name
+                    </label>
+                    <input
+                      className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      onChange={(e) => setFname(e.target.value)}
+                      type="text"
+                      id="fname"
+                      placeholder="Enter your first name"
+                    />
+                  </div>
+                  <div className="flex flex-col mb-4">
+                    <label htmlFor="lname" className="text-white font-bold mb-2">
+                      Last Name
+                    </label>
+                    <input
+                      className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      onChange={(e) => setLname(e.target.value)}
+                      type="text"
+                      id="lname"
+                      placeholder="Enter your last name"
+                    />
+                  </div>
+                  <div className="flex flex-col mb-4">
+                    <label htmlFor="email" className="text-white font-bold mb-2">
+                      Email
+                    </label>
+                    <input
+                      className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
+                      id="email"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                  <div className="flex flex-col mb-4">
+                    <label htmlFor="amount" className="text-white font-bold mb-2">
+                      Amount
+                    </label>
+                    <input
+                      className="bg-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                      onChange={(e) => setAmount(e.target.value)}
+                      type="number"
+                      id="amount"
+                      placeholder="Enter the amount"
+                    />
+                  </div>
+                  <Payment
+                    fname={fname}
+                    lname={lname}
+                    email={email}
+                    amount={amount}
+                    text_ref={text_ref}
+                    public_key={public_key}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
